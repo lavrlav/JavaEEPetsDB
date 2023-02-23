@@ -1,4 +1,4 @@
-package connection;
+package util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -23,9 +23,6 @@ public class ConnectionDB {
         return conn;
     }
 
-    public static void main(String[] args) {
-        ConnectionDB.getConnection();
 
-    }
 }
 
