@@ -13,24 +13,21 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/")
-public class IndexServlet extends HttpServlet {
+@WebServlet("/information")
+public class InformationServlet extends HttpServlet {
+    private final PetDAO petDAO = new PetDAO();
+    private final OwnerDAO ownerDAO = new OwnerDAO();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        PetDAO petDAO = new PetDAO();
+        response.setContentType("text/html;charset=UTF-8");
         List<Pet> pets = petDAO.selectAll();
         request.setAttribute("pets", pets);
 
-        OwnerDAO ownerDAO = new OwnerDAO();
         List<Owner> owners = ownerDAO.selectAll();
         request.setAttribute("owners", owners);
 
-        getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/information.jsp").forward(request, response);
 
     }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
 }

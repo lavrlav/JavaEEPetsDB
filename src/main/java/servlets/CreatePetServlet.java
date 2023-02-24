@@ -1,8 +1,6 @@
 package servlets;
 
-import dao.OwnerDAO;
 import dao.PetDAO;
-import entity.Owner;
 import entity.Pet;
 
 import javax.servlet.*;
@@ -10,18 +8,18 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet("/create")
-public class CreateServlet extends HttpServlet {
+@WebServlet("/createPet")
+public class CreatePetServlet extends HttpServlet {
+    private final PetDAO petDAO = new PetDAO();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        getServletContext().getRequestDispatcher("/create.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/createPet.jsp").forward(request, response);
 
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            PetDAO petDAO = new PetDAO();
             int id = Integer.parseInt(request.getParameter("id"));
             String animal = request.getParameter("animal");
             String name = request.getParameter("name");
@@ -37,26 +35,11 @@ public class CreateServlet extends HttpServlet {
                     .ownerId(ownerId)
                     .build();
             petDAO.create(pet);
-            response.sendRedirect(request.getContextPath()+"/index");
-        }
-        catch(Exception ex) {
+            response.sendRedirect(request.getContextPath() + "/information");
+        } catch (Exception ex) {
 
-            getServletContext().getRequestDispatcher("/create.jsp").forward(request, response);
+            getServletContext().getRequestDispatcher("/createPet.jsp").forward(request, response);
         }
-        try {
-            OwnerDAO ownerDAO = new OwnerDAO();
-            int id = Integer.parseInt(request.getParameter("id"));
-            String name = request.getParameter("name");
-            Owner owner = Owner.builder()
-                    .id(id)
-                    .name(name)
-                    .build();
-            ownerDAO.create(owner);
-            response.sendRedirect(request.getContextPath()+"/index");
-        }
-        catch(Exception ex) {
 
-            getServletContext().getRequestDispatcher("/create.jsp").forward(request, response);
-        }
     }
 }
