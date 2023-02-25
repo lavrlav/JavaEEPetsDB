@@ -25,14 +25,12 @@ public class CreateOwnerServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         try {
-            int id = Integer.parseInt(request.getParameter("id"));
             String name = request.getParameter("name");
             Owner owner = Owner.builder()
-                    .id(id)
                     .name(name)
                     .build();
             ownerDAO.create(owner);
-            response.sendRedirect(request.getContextPath() + "/information");
+            response.sendRedirect(request.getContextPath() + "/index");
         } catch (Exception ex) {
 
             getServletContext().getRequestDispatcher("/createOwner.jsp").forward(request, response);
