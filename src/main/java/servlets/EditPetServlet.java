@@ -1,42 +1,23 @@
 package servlets;
 
-import dao.OwnerDAO;
 import dao.PetDAO;
-import entity.Owner;
 import entity.Pet;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.annotation.*;
 import java.io.IOException;
 
-
-@WebServlet("/edit")
-public class EditServlet extends HttpServlet {
-    private final OwnerDAO ownerDAO = new OwnerDAO();
+@WebServlet("/editPet")
+public class EditPetServlet extends HttpServlet {
     private final PetDAO petDAO = new PetDAO();
-
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        try {
-            int id = Integer.parseInt(request.getParameter("id"));
-            if (ownerDAO.selectOne(id) != null) {
-                request.setAttribute("owner", ownerDAO.selectOne(id));
-                getServletContext().getRequestDispatcher("/edit.jsp").forward(request, response);
-            } else {
-                getServletContext().getRequestDispatcher("/notfound.jsp").forward(request, response);
-            }
-        } catch (Exception ex) {
-            getServletContext().getRequestDispatcher("/notfound.jsp").forward(request, response);
-        }
-
         try {
             int id = Integer.parseInt(request.getParameter("id"));
             if (petDAO.selectOne(id) != null) {
                 request.setAttribute("pet", petDAO.selectOne(id));
-                getServletContext().getRequestDispatcher("/edit.jsp").forward(request, response);
+                getServletContext().getRequestDispatcher("/editPet.jsp").forward(request, response);
             } else {
                 getServletContext().getRequestDispatcher("/notfound.jsp").forward(request, response);
             }
@@ -45,21 +26,8 @@ public class EditServlet extends HttpServlet {
         }
     }
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        try {
-            int id = Integer.parseInt(request.getParameter("id"));
-            String name = request.getParameter("name");
-            Owner owner = Owner.builder()
-                    .id(id)
-                    .name(name)
-                    .build();
-            ownerDAO.update(owner, id);
-            response.sendRedirect(request.getContextPath() + "/index");
-        } catch (Exception ex) {
-
-            getServletContext().getRequestDispatcher("/notfound.jsp").forward(request, response);
-        }
         try {
             int id = Integer.parseInt(request.getParameter("id"));
             String animal = request.getParameter("animal");
@@ -81,5 +49,4 @@ public class EditServlet extends HttpServlet {
             getServletContext().getRequestDispatcher("/notfound.jsp").forward(request, response);
         }
     }
-
 }

@@ -19,8 +19,8 @@
             <td>${owner.id}</td>
             <td>${owner.name}</td>
             <td>
-                <a href='<c:url value="/edit?id=${owner.id}" />'>Edit</a> |
-                <form method="post" action='<c:url value="/delete" />' style="display:inline;">
+                <a href='<c:url value="/editOwner?id=${owner.id}" />'>Edit</a> |
+                <form method="post" action='<c:url value="/deleteOwner" />' style="display:inline;">
                     <input type="hidden" name="id" value="${owner.id}">
                     <input type="submit" value="Delete">
                 </form>
@@ -49,8 +49,8 @@
             <td>${pet.color}</td>
             <td>${pet.ownerId}</td>
             <td>
-                <a href='<c:url value="/edit?id=${pet.id}" />'>Edit</a> |
-                <form method="post" action='<c:url value="/delete" />' style="display:inline;">
+                <a href='<c:url value="/editPet?id=${pet.id}" />'>Edit</a> |
+                <form method="post" action='<c:url value="/deletePet" />' style="display:inline;">
                     <input type="hidden" name="id" value="${pet.id}">
                     <input type="submit" value="Delete">
                 </form>

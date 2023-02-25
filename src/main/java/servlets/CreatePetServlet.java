@@ -34,7 +34,7 @@ public class CreatePetServlet extends HttpServlet {
                     .ownerId(ownerId)
                     .build();
             petDAO.create(pet);
-            response.sendRedirect(request.getContextPath() + "/information");
+            response.sendRedirect(request.getContextPath() + "/index");
         } catch (Exception ex) {
 
             getServletContext().getRequestDispatcher("/createPet.jsp").forward(request, response);
