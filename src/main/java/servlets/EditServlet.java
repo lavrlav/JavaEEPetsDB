@@ -18,7 +18,6 @@ public class EditServlet extends HttpServlet {
     private final OwnerDAO ownerDAO = new OwnerDAO();
     private final PetDAO petDAO = new PetDAO();
 
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         try {
@@ -56,7 +55,7 @@ public class EditServlet extends HttpServlet {
                     .name(name)
                     .build();
             ownerDAO.update(owner, id);
-            response.sendRedirect(request.getContextPath() + "/information");
+            response.sendRedirect(request.getContextPath() + "/index");
         } catch (Exception ex) {
 
             getServletContext().getRequestDispatcher("/notfound.jsp").forward(request, response);
@@ -77,9 +76,8 @@ public class EditServlet extends HttpServlet {
                     .ownerId(ownerId)
                     .build();
             petDAO.update(pet, id);
-            response.sendRedirect(request.getContextPath() + "/information");
+            response.sendRedirect(request.getContextPath() + "/index");
         } catch (Exception ex) {
-
             getServletContext().getRequestDispatcher("/notfound.jsp").forward(request, response);
         }
     }

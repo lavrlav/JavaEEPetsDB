@@ -19,7 +19,7 @@ public class DeleteServlet extends HttpServlet {
         try {
             int id = Integer.parseInt(request.getParameter("id"));
             petDAO.delete(id);
-            response.sendRedirect(request.getContextPath() + "/information");
+            response.sendRedirect(request.getContextPath() + "/index");
         }
         catch(Exception ex) {
             getServletContext().getRequestDispatcher("/notfound.jsp").forward(request, response);
@@ -27,7 +27,7 @@ public class DeleteServlet extends HttpServlet {
         try {
             int id = Integer.parseInt(request.getParameter("id"));
             ownerDAO.delete(id);
-            response.sendRedirect(request.getContextPath() + "/information");
+            response.sendRedirect(request.getContextPath() + "/index");
         }
         catch(Exception ex) {
             getServletContext().getRequestDispatcher("/notfound.jsp").forward(request, response);

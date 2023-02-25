@@ -6,8 +6,8 @@
 <body>
 <h3>New pet</h3>
 <form method="post">
-    <label>Id</label><br>
-    <input name="id"/><br><br>
+<%--    <label>Id</label><br>--%>
+<%--    <input name="id"/><br><br>--%>
     <label>Animal</label><br>
     <input name="animal"/><br><br>
     <label>Name</label><br>
