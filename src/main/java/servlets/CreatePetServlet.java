@@ -11,6 +11,7 @@ import java.io.IOException;
 @WebServlet("/createPet")
 public class CreatePetServlet extends HttpServlet {
     private final PetDAO petDAO = new PetDAO();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         getServletContext().getRequestDispatcher("/createPet.jsp").forward(request, response);
@@ -20,12 +21,13 @@ public class CreatePetServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-           // int id = Integer.parseInt(request.getParameter("id"));
-            String animal = request.getParameter("animal");
-            String name = request.getParameter("name");
-            int age = Integer.parseInt(request.getParameter("age"));
-            String color = request.getParameter("color");
-            int ownerId = Integer.parseInt(request.getParameter("ownerId"));
+        // int id = Integer.parseInt(request.getParameter("id"));
+        String animal = request.getParameter("animal");
+        String name = request.getParameter("name");
+        int age = Integer.parseInt(request.getParameter("age"));
+        String color = request.getParameter("color");
+        int ownerId = Integer.parseInt(request.getParameter("owner_id"));
+
             Pet pet = Pet.builder()
                     .animal(animal)
                     .name(name)
